@@ -9,6 +9,7 @@ version          "0.4.3"
 depends          "git"
 depends          "zsh"
 depends          "users"
+depends          "chef-solo-search"
 
 %w( ubuntu debian
     centos redhat fedora ).each do |os|

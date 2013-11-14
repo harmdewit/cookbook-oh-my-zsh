@@ -23,18 +23,18 @@ include_recipe "zsh"
 search( :users, "shell:*zsh AND NOT action:remove" ).each do |u|
   user_id = u["id"]
 
-  git "/home/#{user_id}/.oh-my-zsh" do
+  git "#{u['home']}/.oh-my-zsh" do
     repository node[:ohmyzsh][:repository]
     reference "master"
     user user_id
     group user_id
     action :checkout
-    not_if "test -d /home/#{user_id}/.oh-my-zsh"
+    not_if "test -d #{u['home']}/.oh-my-zsh"
   end
 
   theme = data_bag_item( "users", user_id )["oh-my-zsh-theme"]
 
-  template "/home/#{user_id}/.zshrc" do
+  template "#{u['home']}/.zshrc" do
     source "zshrc.erb"
     owner user_id
     group user_id
