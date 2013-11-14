@@ -24,7 +24,7 @@ search( :users, "shell:*zsh AND NOT action:remove" ).each do |u|
   user_id = u["id"]
 
   git "/home/#{user_id}/.oh-my-zsh" do
-    repository "https://github.com/robbyrussell/oh-my-zsh.git"
+    repository node[:ohmyzsh][:repository]
     reference "master"
     user user_id
     group user_id
